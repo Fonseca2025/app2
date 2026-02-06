@@ -9,8 +9,8 @@
     
     <style>
         :root {
-            --azul-logo: #2D46B9; /* Azul da Logo */
-            --amarelo-logo: #E9C143; /* Amarelo/Dourado da Logo */
+            --azul-logo: #2D46B9;
+            --amarelo-logo: #E9C143;
             --bg: #f8f9fa;
             --texto: #1a1a1a;
             --safe-top: env(safe-area-inset-top);
@@ -30,11 +30,9 @@
             background-color: var(--bg); 
             margin: 0; 
             color: var(--texto);
-            /* Espaço para o Header com Logo e Busca */
             padding-top: calc(var(--safe-top) + 210px); 
         }
 
-        /* Cabeçalho Profissional */
         header { 
             background: white;
             position: fixed; top: 0; width: 100%; z-index: 1000;
@@ -50,11 +48,9 @@
         #searchBar {
             width: 100%; padding: 12px 15px; border-radius: 12px;
             border: 2px solid #eee; background: #f1f3f4; font-size: 16px; 
-            color: #000; outline: none; transition: border 0.3s;
+            color: #000; outline: none;
         }
-        #searchBar:focus { border-color: var(--azul-logo); background: white; }
 
-        /* Categorias horizontais */
         .categories {
             display: flex; overflow-x: auto; padding: 10px 15px; gap: 8px;
             scrollbar-width: none; background: white;
@@ -63,11 +59,10 @@
         .pill {
             padding: 8px 18px; border-radius: 20px; background: #eee;
             border: none; color: #555; font-size: 13px; font-weight: 700;
-            white-space: nowrap; transition: 0.2s;
+            white-space: nowrap;
         }
         .pill.active { background: var(--azul-logo); color: white; }
 
-        /* Grade de Câmeras */
         .grid {
             display: grid; 
             grid-template-columns: repeat(4, 1fr);
@@ -79,9 +74,9 @@
             background: var(--azul-logo); 
             border: 3px solid var(--amarelo-logo);
             border-radius: 18px; 
-            font-size: 32px; /* AUMENTADO */
+            font-size: 32px; 
             font-weight: 900; 
-            color: white; /* Cor dos números */
+            color: white; 
             box-shadow: 0 5px 15px rgba(45, 70, 185, 0.3);
             display: flex; align-items: center; justify-content: center;
             transition: transform 0.1s;
@@ -89,7 +84,6 @@
 
         .btn:active { transform: scale(0.85); background: #1a2a8c; }
 
-        /* Pop-up Personalizado */
         #modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center;
@@ -113,7 +107,6 @@
 
 <header>
     <div class="logo-container">
-        <!-- Substitua logo.png pelo nome da sua imagem no GitHub -->
         <img src="logo.png" alt="Guardiã dos Montes" class="logo-img">
     </div>
     <div class="search-container">
@@ -123,7 +116,7 @@
         <button class="pill active" onclick="filtrarCat('TUDO', this)">TUDO</button>
         <button class="pill" onclick="filtrarCat('CENTRO', this)">CENTRO</button>
         <button class="pill" onclick="filtrarCat('TREVO', this)">TREVOS</button>
-        <button class="pill" onclick="filtrarCat('RODOVIA', this)">RODOVIAS</button>
+        <button class="pill" onclick="filtrarCat('SAÍDA', this)">SAÍDAS</button>
     </div>
 </header>
 
@@ -156,58 +149,58 @@
         15: {l: "PCA PIO XII - CATEDRAL", c: "CENTRO"},
         16: {l: "JUCA PRATES X PE. AUGUSTO", c: "CENTRO"},
         17: {l: "R. JOAQ COSTA X CEL. ANT. D. ANJOS", c: "CENTRO"},
-        18: {l: "R. JOAQ COSTA X VISC. DE OURO P.", c: "CENTRO"},
+        18: {l: "R. JOAQ COSTA X VISC. DE OURO PRETO", c: "CENTRO"},
         19: {l: "AV. OSV. CRUZ X PADRE CHICO", c: "OUTROS"},
-        20: {l: "AV. DULCE SARM. X FLAM. WANDER", c: "OUTROS"},
+        20: {l: "AV. DULCE SARM. X FLAM. WANDERLEY", c: "OUTROS"},
         21: {l: "AV. DULCE SARM. X SEB DIAS SOARES", c: "OUTROS"},
         22: {l: "AV. DULCE SARM. X FLORI. NEIVA", c: "OUTROS"},
-        23: {l: "AV. GER ATHAIDE X EST. RODRIG.", c: "OUTROS"},
-        24: {l: "AV. GER ATHAIDE X CEL J ALVES", c: "OUTROS"},
-        25: {l: "AV. GER ATHAIDEX X J LOPES CARV.", c: "OUTROS"},
+        23: {l: "AV. GERALDO ATHAIDE X AVE. ESTEVES RODRIGUES", c: "OUTROS"},
+        24: {l: "AV. GER ATHAIDE X RUA CEL JOSE ALVES", c: "OUTROS"},
+        25: {l: "AV. GER ATHAIDE (CASA LOTERICA)", c: "OUTROS"},
         26: {l: "RUA SÃO FRANCISCO X RUA VISCONDE DE OURO PRETO", c: "CENTRO"},
         27: {l: "PRAÇA MATRIZ PROX BABI", c: "CENTRO"},
         28: {l: "R. FLORIA. NEIVA X JUST. CÂMARA", c: "OUTROS"},
-        29: {l: "AV, ARMENIO VEL. X FILOMENO", c: "OUTROS"},
-        30: {l: "PE. TEIXEIRA X AV. ARMENIO VELOS.", c: "OUTROS"},
-        31: {l: "MAL. DEODORO X ARTUR BERNAR", c: "OUTROS"},
+        29: {l: "AV. ARMENIO VELOSO X AV. FILOMENO RIBEIRO (PRACA DE ESPORTES)", c: "OUTROS"},
+        30: {l: "RUA PE. TEIXEIRA X AV. ARMENIO VELOSO (PRACA DE ESPORTES)", c: "OUTROS"},
+        31: {l: "RUA MARECHAL DEODORO X AV. ARTUR BERNARDES", c: "OUTROS"},
         32: {l: "DEP. ESTEVES RODR X JOAO XXIII", c: "OUTROS"},
         33: {l: "JOAO XXIII ANTIGA UAI", c: "OUTROS"},
-        34: {l: "JOAO XXIII X PRES KENEDY", c: "OUTROS"},
+        34: {l: "AVE. JOAO XXIII X AV. PRESIDENTE KENNEDY", c: "OUTROS"},
         35: {l: "DOUTOR VELOSO X DOM PEDRO II", c: "CENTRO"},
         36: {l: "PRES. VARGAS X DOUTOR VELOSO", c: "CENTRO"},
         37: {l: "GOV. VALAD. X CEL. PRATES", c: "CENTRO"},
         38: {l: "SIMEAO RIBEIRO X ALT FREITAS", c: "CENTRO"},
         39: {l: "SIMEAO RIBEIRO X LAFETA", c: "CENTRO"},
         40: {l: "SANTA MARIA X GONC FIGUEIRA", c: "OUTROS"},
-        41: {l: "SANTA MARIA X DEP ESTEVES RODR.", c: "OUTROS"},
+        41: {l: "RUA SANTA MARIA X AV. DEP ESTEVES RODRIGUES", c: "OUTROS"},
         42: {l: "DEP EST. RODRIG CASA ESFIRRA", c: "OUTROS"},
         43: {l: "SANTA MARIA X SANTO ANTONIO", c: "OUTROS"},
         44: {l: "BAR. RIO BRANCO X AFONSO PENA", c: "CENTRO"},
         45: {l: "AV. CEL PRATES PRAÇA STA CASA", c: "CENTRO"},
         46: {l: "ALL TIME", c: "OUTROS"},
-        47: {l: "DEP EST. RODRIGUES X PREFEIT", c: "OUTROS"},
-        48: {l: "CULA MANGAB. HU", c: "OUTROS"},
-        49: {l: "CULA X JOAO REBELO", c: "OUTROS"},
+        47: {l: "DEP EST. RODRIGUES X PREFEITURA ANTIGA", c: "OUTROS"},
+        48: {l: "AV. CULA MANGABEIRA - HOSPITAL UNIVERSITARIO", c: "OUTROS"},
+        49: {l: "AV. CULA MANGABEIRA X RUA JOAO REBELO", c: "OUTROS"},
         50: {l: "TREV. RODOVIARIA BANCO BRASIL", c: "TREVO"},
         51: {l: "RODOVIARIA DROGASIL", c: "RODOVIA"},
-        52: {l: "FCO GAETANI X CASTELAR PRAT.", c: "OUTROS"},
+        52: {l: "FCO GAETANI X CASTELAR PRATES", c: "OUTROS"},
         53: {l: "PARQ. DE EXPOS X LINHA FERREA", c: "OUTROS"},
         54: {l: "LAGOA DE INTERLAGOS", c: "OUTROS"},
         55: {l: "TREVO DA SION", c: "TREVO"},
         56: {l: "TREVO SAMU", c: "TREVO"},
         57: {l: "TREVO MAJOR PRATES - PARQUE", c: "TREVO"},
-        58: {l: "JOÃO XXIII X PADRE FABIANO", c: "OUTROS"},
+        58: {l: "JOÃO XXIII x PADRE FABIANO", c: "OUTROS"},
         59: {l: "TREVO INDUSTRIAS", c: "TREVO"},
         60: {l: "SAIDA BR365", c: "SAÍDA"},
-        61: {l: "SAIDA ESTR. PRODUÇÃO", c: "SAÍDA"},
+        61: {l: "ESTRADA DA PRODUCAO", c: "SAÍDA"},
         62: {l: "SAIDA BR251", c: "SAÍDA"},
         63: {l: "SAIDA MG308", c: "SAÍDA"},
         64: {l: "SAIDA BR135", c: "SAÍDA"},
         65: {l: "BR135 ANEL ROD", c: "SAÍDA"},
-        66: {l: "SAIDA", c: "SAÍDA"},
+        66: {l: "SAIDA PARA PIRAPORA", c: "SAÍDA"},
         67: {l: "RODOVIARIA", c: "RODOVIA"},
-        68: {l: "VICENTE GUIMA", c: "OUTROS"},
-        69: {l: "PL RIB X CEL L MAIA", c: "OUTROS"},
+        68: {l: "AV. VICENTE GUIMARAES", c: "OUTROS"},
+        69: {l: "AV. DEP PLINIO RIBEIRO X AV. CEL LUIZ MAIA", c: "OUTROS"},
         70: {l: "PREFEITURA NOVA", c: "OUTROS"},
         71: {l: "TREVO TROPEIROS", c: "TREVO"}
     };
