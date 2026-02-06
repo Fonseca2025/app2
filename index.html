@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Guardiã dos Montes - Câmeras</title>
+    <title>Guardiã dos Montes - GPS</title>
     
     <style>
         :root {
@@ -18,28 +18,20 @@
         }
 
         @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #121212;
-                --texto: #ffffff;
-            }
+            :root { --bg: #121212; --texto: #ffffff; }
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body { 
             font-family: -apple-system, system-ui, sans-serif; 
-            background-color: var(--bg); 
-            margin: 0; 
-            color: var(--texto);
+            background-color: var(--bg); margin: 0; color: var(--texto);
             padding-top: calc(var(--safe-top) + 210px); 
         }
 
         header { 
-            background: white;
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding-top: var(--safe-top);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            text-align: center;
+            background: white; position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding-top: var(--safe-top); box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center;
         }
 
         .logo-container { padding: 15px 10px 5px 10px; }
@@ -48,8 +40,7 @@
         .search-container { padding: 10px 15px; }
         #searchBar {
             width: 100%; padding: 12px 15px; border-radius: 12px;
-            border: 2px solid #eee; background: #f1f3f4; font-size: 16px; 
-            color: #000; outline: none;
+            border: 2px solid #eee; background: #f1f3f4; font-size: 16px; outline: none;
         }
 
         .categories {
@@ -59,28 +50,20 @@
         .categories::-webkit-scrollbar { display: none; }
         .pill {
             padding: 8px 18px; border-radius: 20px; background: #eee;
-            border: none; color: #555; font-size: 13px; font-weight: 700;
-            white-space: nowrap;
+            border: none; color: #555; font-size: 13px; font-weight: 700; white-space: nowrap;
         }
         .pill.active { background: var(--azul-logo); color: white; }
 
         .grid {
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr);
+            display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 12px; padding: 20px; max-width: 500px; margin: 0 auto;
         }
 
         .btn {
-            aspect-ratio: 1/1; 
-            background: var(--azul-logo); 
-            border: 3px solid var(--amarelo-logo);
-            border-radius: 18px; 
-            font-size: 32px; 
-            font-weight: 900; 
-            color: white; 
+            aspect-ratio: 1/1; background: var(--azul-logo); border: 3px solid var(--amarelo-logo);
+            border-radius: 18px; font-size: 32px; font-weight: 900; color: white; 
             box-shadow: 0 5px 15px rgba(45, 70, 185, 0.3);
-            display: flex; align-items: center; justify-content: center;
-            transition: transform 0.1s;
+            display: flex; align-items: center; justify-content: center; transition: transform 0.1s;
         }
 
         .btn:active { transform: scale(0.85); background: #1a2a8c; }
@@ -98,39 +81,21 @@
         #modal-text { font-size: 19px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; margin-bottom: 20px; }
         
         .maps-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: var(--verde-maps);
-            color: white;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            font-size: 15px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: var(--verde-maps); color: white; text-decoration: none;
+            padding: 14px; border-radius: 12px; font-weight: 700; margin-bottom: 12px;
             box-shadow: 0 4px 10px rgba(52, 168, 83, 0.3);
         }
-        .maps-link:active { transform: scale(0.95); opacity: 0.9; }
 
-        .close-btn { 
-            background: #f1f3f4; color: #666; border: none; padding: 12px; 
-            border-radius: 12px; font-size: 14px; font-weight: 700; width: 100%;
-        }
-
+        .close-btn { background: #f1f3f4; color: #666; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: 700; }
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-container">
-        <img src="logo.png" alt="Guardiã dos Montes" class="logo-img">
-    </div>
-    <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Pesquisar rua ou nº..." onkeyup="filtrar()">
-    </div>
+    <div class="logo-container"><img src="logo.png" alt="Guardiã dos Montes" class="logo-img"></div>
+    <div class="search-container"><input type="text" id="searchBar" placeholder="Pesquisar rua ou nº..." onkeyup="filtrar()"></div>
     <div class="categories">
         <button class="pill active" onclick="filtrarCat('TUDO', this)">TUDO</button>
         <button class="pill" onclick="filtrarCat('CENTRO', this)">CENTRO</button>
@@ -145,89 +110,84 @@
     <div class="modal-box">
         <div id="modal-title">DETALHES DA CÂMERA</div>
         <div id="modal-text"></div>
-        
-        <!-- BOTÃO COM PINO NO MAPA -->
-        <a id="maps-url" href="" target="_blank" class="maps-link">
-            📍 VER LOCAL NO MAPA
-        </a>
-
+        <a id="maps-url" href="" target="_blank" class="maps-link">📍 ABRIR COORDENADAS GPS</a>
         <button class="close-btn" onclick="fechar()">VOLTAR</button>
     </div>
 </div>
 
 <script>
     const cameras = {
-        1: {l: "PCA DR CARLOS FRENTE MIN FAZENDA", c: "CENTRO"},
-        2: {l: "PCA DR CARLOS FRENTE COPASA", c: "CENTRO"},
-        3: {l: "DR. SANTOS X PE. AUGUSTO", c: "CENTRO"},
-        4: {l: "DR. SANTOS X D. PEDRO II", c: "CENTRO"},
-        5: {l: "DR. SANTOS X D. JOÃO PIMENTA", c: "CENTRO"},
-        6: {l: "PCA CEL. RIBEIRO", c: "CENTRO"},
-        7: {l: "R. CAMILO P. X D. PEDRO II", c: "CENTRO"},
-        8: {l: "R. CAMILO P. X PE. AUGUSTO", c: "CENTRO"},
-        9: {l: "PCA DR CARLOS", c: "CENTRO"},
-        10: {l: "R. SÃO FRANC. X GOV. VALADARES", c: "CENTRO"},
-        11: {l: "R. SÃO FRANC. X CEL. ANT. D. ANJOS", c: "CENTRO"},
-        12: {l: "R. SÃO FRANC. X RUI BARBOSA", c: "CENTRO"},
-        13: {l: "R. SÃO FRANC. X PE. AUGUSTO", c: "CENTRO"},
-        14: {l: "R. SÃO FRANC. X D. PEDRO II", c: "CENTRO"},
-        15: {l: "PCA PIO XII - CATEDRAL", c: "CENTRO"},
-        16: {l: "JUCA PRATES X PE. AUGUSTO", c: "CENTRO"},
-        17: {l: "R. JOAQ COSTA X CEL. ANT. D. ANJOS", c: "CENTRO"},
-        18: {l: "R. JOAQ COSTA X VISC. DE OURO PRETO", c: "CENTRO"},
-        19: {l: "AV. OSV. CRUZ X PADRE CHICO", c: "OUTROS"},
-        20: {l: "AV. DULCE SARM. X FLAM. WANDERLEY", c: "OUTROS"},
-        21: {l: "AV. DULCE SARM. X SEB DIAS SOARES", c: "OUTROS"},
-        22: {l: "AV. DULCE SARM. X FLORI. NEIVA", c: "OUTROS"},
-        23: {l: "AV. GERALDO ATHAIDE X AVE. ESTEVES RODRIGUES", c: "OUTROS"},
-        24: {l: "AV. GER ATHAIDE X RUA CEL JOSE ALVES", c: "OUTROS"},
-        25: {l: "AV. GER ATHAIDE (CASA LOTERICA)", c: "OUTROS"},
-        26: {l: "RUA SÃO FRANCISCO X RUA VISCONDE DE OURO PRETO", c: "CENTRO"},
-        27: {l: "PRAÇA MATRIZ PROX BABI", c: "CENTRO"},
-        28: {l: "R. FLORIA. NEIVA X JUST. CÂMARA", c: "OUTROS"},
-        29: {l: "AV. ARMENIO VELOSO X AV. FILOMENO RIBEIRO (PRACA DE ESPORTES)", c: "OUTROS"},
-        30: {l: "RUA PE. TEIXEIRA X AV. ARMENIO VELOSO (PRACA DE ESPORTES)", c: "OUTROS"},
-        31: {l: "RUA MARECHAL DEODORO X AV. ARTUR BERNARDES", c: "OUTROS"},
-        32: {l: "DEP. ESTEVES RODR X JOAO XXIII", c: "OUTROS"},
-        33: {l: "JOAO XXIII ANTIGA UAI", c: "OUTROS"},
-        34: {l: "AVE. JOAO XXIII X AV. PRESIDENTE KENNEDY", c: "OUTROS"},
-        35: {l: "DOUTOR VELOSO X DOM PEDRO II", c: "CENTRO"},
-        36: {l: "PRES. VARGAS X DOUTOR VELOSO", c: "CENTRO"},
-        37: {l: "GOV. VALAD. X CEL. PRATES", c: "CENTRO"},
-        38: {l: "SIMEAO RIBEIRO X ALT FREITAS", c: "CENTRO"},
-        39: {l: "SIMEAO RIBEIRO X LAFETA", c: "CENTRO"},
-        40: {l: "SANTA MARIA X GONC FIGUEIRA", c: "OUTROS"},
-        41: {l: "RUA SANTA MARIA X AV. DEP ESTEVES RODRIGUES", c: "OUTROS"},
-        42: {l: "DEP EST. RODRIG CASA ESFIRRA", c: "OUTROS"},
-        43: {l: "SANTA MARIA X SANTO ANTONIO", c: "OUTROS"},
-        44: {l: "BAR. RIO BRANCO X AFONSO PENA", c: "CENTRO"},
-        45: {l: "AV. CEL PRATES PRAÇA STA CASA", c: "CENTRO"},
-        46: {l: "ALL TIME", c: "OUTROS"},
-        47: {l: "DEP EST. RODRIGUES X PREFEITURA ANTIGA", c: "OUTROS"},
-        48: {l: "AV. CULA MANGABEIRA - HOSPITAL UNIVERSITARIO", c: "OUTROS"},
-        49: {l: "AV. CULA MANGABEIRA X RUA JOAO REBELO", c: "OUTROS"},
-        50: {l: "TREV. RODOVIARIA BANCO BRASIL", c: "TREVO"},
-        51: {l: "RODOVIARIA DROGASIL", c: "RODOVIA"},
-        52: {l: "FCO GAETANI X CASTELAR PRATES", c: "OUTROS"},
-        53: {l: "PARQ. DE EXPOS X LINHA FERREA", c: "OUTROS"},
-        54: {l: "LAGOA DE INTERLAGOS", c: "OUTROS"},
-        55: {l: "TREVO DA SION", c: "TREVO"},
-        56: {l: "TREVO SAMU", c: "TREVO"},
-        57: {l: "TREVO MAJOR PRATES - PARQUE", c: "TREVO"},
-        58: {l: "JOÃO XXIII x PADRE FABIANO", c: "OUTROS"},
-        59: {l: "TREVO INDUSTRIAS", c: "TREVO"},
-        60: {l: "SAIDA BR365", c: "SAÍDA"},
-        61: {l: "ESTRADA DA PRODUCAO", c: "SAÍDA"},
-        62: {l: "SAIDA BR251", c: "SAÍDA"},
-        63: {l: "SAIDA MG308", c: "SAÍDA"},
-        64: {l: "SAIDA BR135", c: "SAÍDA"},
-        65: {l: "BR135 ANEL ROD", c: "SAÍDA"},
-        66: {l: "SAIDA PARA PIRAPORA", c: "SAÍDA"},
-        67: {l: "RODOVIARIA", c: "RODOVIA"},
-        68: {l: "AV. VICENTE GUIMARAES", c: "OUTROS"},
-        69: {l: "AV. DEP PLINIO RIBEIRO X AV. CEL LUIZ MAIA", c: "OUTROS"},
-        70: {l: "PREFEITURA NOVA", c: "OUTROS"},
-        71: {l: "TREVO TROPEIROS", c: "TREVO"}
+        1: {l: "PCA DR CARLOS FRENTE MIN FAZENDA", c: "CENTRO", g: "-16.722728,-43.865195"},
+        2: {l: "PCA DR CARLOS FRENTE COPASA", c: "CENTRO", g: "-16.7233637,-43.8653465"},
+        3: {l: "DR. SANTOS X PE. AUGUSTO", c: "CENTRO", g: "-16.7240059,-43.8653894"},
+        4: {l: "DR. SANTOS X D. PEDRO II", c: "CENTRO", g: "-16.7249911,-43.8656682"},
+        5: {l: "DR. SANTOS X D. JOÃO PIMENTA", c: "CENTRO", g: "-16.7264145,-43.8659132"},
+        6: {l: "PCA CEL. RIBEIRO", c: "CENTRO", g: "-16.7271019,-43.8667055"},
+        7: {l: "R. CAMILO P. X D. PEDRO II", c: "CENTRO", g: "-16.72495,-43.8662154"},
+        8: {l: "R. CAMILO P. X PE. AUGUSTO", c: "CENTRO", g: "-16.7237787,-43.8660667"},
+        9: {l: "PCA DR CARLOS", c: "CENTRO", g: "-16.7225366,-43.8658159"},
+        10: {l: "R. SÃO FRANC. X GOV. VALADARES", c: "CENTRO", g: "-16.7228943,-43.8642814"},
+        11: {l: "R. SÃO FRANC. X CEL. ANT. D. ANJOS", c: "CENTRO", g: "-16.7233002,-43.864411"},
+        12: {l: "R. SÃO FRANC. X RUI BARBOSA", c: "CENTRO", g: "-16.7236155,-43.8644671"},
+        13: {l: "R. SÃO FRANC. X PE. AUGUSTO", c: "CENTRO", g: "-16.7241608,-43.8645747"},
+        14: {l: "R. SÃO FRANC. X D. PEDRO II", c: "CENTRO", g: "-16.7252069,-43.8647858"},
+        15: {l: "PCA PIO XII - CATEDRAL", c: "CENTRO", g: "-16.7254708,-43.8635566"},
+        16: {l: "JUCA PRATES X PE. AUGUSTO", c: "CENTRO", g: "-16.724295,-43.8639704"},
+        17: {l: "R. JOAQ COSTA X CEL. ANT. D. ANJOS", c: "CENTRO", g: "-16.7233586,-43.8637892"},
+        18: {l: "R. JOAQ COSTA X VISC. DE OURO PRETO", c: "CENTRO", g: "-16.7225996,-43.8635439"},
+        19: {l: "AV. OSV. CRUZ X PADRE CHICO", c: "OUTROS", g: "-16.7214043,-43.8633808"},
+        20: {l: "AV. DULCE SARM. X FLAM. WANDERLEY", c: "OUTROS", g: "-16.7186891,-43.8597422"},
+        21: {l: "AV. DULCE SARM. X SEB DIAS SOARES", c: "OUTROS", g: "-16.7184532,-43.856777"},
+        22: {l: "AV. DULCE SARM. X FLORI. NEIVA", c: "OUTROS", g: "-16.7184455,-43.8541109"},
+        23: {l: "AV. GERALDO ATHAIDE X AVE. ESTEVES RODRIGUES", c: "OUTROS", g: "-16.7177714,-43.8594945"},
+        24: {l: "AV. GER ATHAIDE X RUA CEL JOSE ALVES", c: "OUTROS", g: "-16.7164379,-43.8580461"},
+        25: {l: "AV. GER ATHAIDE (CASA LOTERICA)", c: "OUTROS", g: "-16.71552279,-43.8563751"},
+        26: {l: "RUA SÃO FRANCISCO X RUA VISCONDE DE OURO PRETO", c: "CENTRO", g: "-16.72243590296203,-43.86421571530572"},
+        27: {l: "PRAÇA MATRIZ PROX BABI", c: "CENTRO", g: "-16.7211986,-43.865807"},
+        28: {l: "R. FLORIA. NEIVA X JUST. CÂMARA", c: "OUTROS", g: "-16.7205835,-43.8655594"},
+        29: {l: "AV. ARMENIO VELOSO X AV. FILOMENO RIBEIRO (PRACA DE ESPORTES)", c: "OUTROS", g: "-16.7209947,-43.8644949"},
+        30: {l: "RUA PE. TEIXEIRA X AV. ARMENIO VELOSO (PRACA DE ESPORTES)", c: "OUTROS", g: "-16.7189659,-43.8632874"},
+        31: {l: "RUA MARECHAL DEODORO X AV. ARTUR BERNARDES", c: "OUTROS", g: "-16.7176466,-43.8631855"},
+        32: {l: "DEP. ESTEVES RODR X JOAO XXIII", c: "OUTROS", g: "-16.715677,-43.8633562"},
+        33: {l: "JOAO XXIII ANTIGA UAI", c: "OUTROS", g: "-16.7137079,-43.8637346"},
+        34: {l: "AVE. JOAO XXIII X AV. PRESIDENTE KENNEDY", c: "OUTROS", g: "-16.7092412,-43.8654801"},
+        35: {l: "DOUTOR VELOSO X DOM PEDRO II", c: "CENTRO", g: "-16.7247872,-43.8670288"},
+        36: {l: "PRES. VARGAS X DOUTOR VELOSO", c: "CENTRO", g: "-16.7232801,-43.8667716"},
+        37: {l: "GOV. VALAD. X CEL. PRATES", c: "CENTRO", g: "-16.7223919,-43.8669699"},
+        38: {l: "SIMEAO RIBEIRO X ALT FREITAS", c: "CENTRO", g: "-16.7224725,-43.8662136"},
+        39: {l: "SIMEAO RIBEIRO X LAFETA", c: "CENTRO", g: "-16.7219834,-43.8661073"},
+        40: {l: "SANTA MARIA X GONC FIGUEIRA", c: "OUTROS", g: "-16.7209822,-43.866872"},
+        41: {l: "RUA SANTA MARIA X AV. DEP ESTEVES RODRIGUES", c: "OUTROS", g: "-16.720182,-43.869157"},
+        42: {l: "DEP EST. RODRIG CASA ESFIRRA", c: "OUTROS", g: "-16.7218961,-43.8718478"},
+        43: {l: "SANTA MARIA X SANTO ANTONIO", c: "OUTROS", g: "-16.7177068,-43.8738467"},
+        44: {l: "BAR. RIO BRANCO X AFONSO PENA", c: "CENTRO", g: "-16.7264486,-43.8693346"},
+        45: {l: "AV. CEL PRATES PRAÇA STA CASA", c: "CENTRO", g: "-16.725157,-43.8699223"},
+        46: {l: "ALL TIME", c: "OUTROS", g: "-16.7275085,-43.8724411"},
+        47: {l: "DEP EST. RODRIGUES X PREFEITURA ANTIGA", c: "OUTROS", g: "-16.7302097,-43.870764"},
+        48: {l: "AV. CULA MANGABEIRA - HOSPITAL UNIVERSITARIO", c: "OUTROS", g: "-16.7333356,-43.8721867"},
+        49: {l: "AV. CULA MANGABEIRA X RUA JOAO REBELO", c: "OUTROS", g: "-16.7370395,-43.872122"},
+        50: {l: "TREV. RODOVIARIA BANCO BRASIL", c: "TREVO", g: "-16.7399357,-43.8718982"},
+        51: {l: "RODOVIARIA DROGASIL", c: "RODOVIA", g: "-16.7416469,-43.8681328"},
+        52: {l: "FCO GAETANI X CASTELAR PRATES", c: "OUTROS", g: "-16.7508975,-43.8787849"},
+        53: {l: "PARQ. DE EXPOS X LINHA FERREA", c: "OUTROS", g: "-16.71179,-43.85011"},
+        54: {l: "LAGOA DE INTERLAGOS", c: "OUTROS", g: "-16.70566,-43.83723"},
+        55: {l: "TREVO DA SION", c: "TREVO", g: "-16.67373,-43.81164"},
+        56: {l: "TREVO SAMU", c: "TREVO", g: "-16.74588,-43.84645"},
+        57: {l: "TREVO MAJOR PRATES - PARQUE", c: "TREVO", g: "-16.7548,-43.88137"},
+        58: {l: "JOÃO XXIII x PADRE FABIANO", c: "OUTROS", g: "-16.70363,-43.86758"},
+        59: {l: "TREVO INDUSTRIAS", c: "TREVO", g: "-16.68953,-43.87299"},
+        60: {l: "SAIDA BR365", c: "SAÍDA", g: "-16.67931,-43.88012"},
+        61: {l: "ESTRADA DA PRODUCAO", c: "SAÍDA", g: "-16.67373,-43.81164"},
+        62: {l: "SAIDA BR251", c: "SAÍDA", g: "-16.67717,-43.79991"},
+        63: {l: "SAIDA MG308", c: "SAÍDA", g: "-16.74991,-43.82731"},
+        64: {l: "SAIDA BR135", c: "SAÍDA", g: "-16.76691,-43.84175"},
+        65: {l: "BR135 ANEL ROD", c: "SAÍDA", g: "-16.76498,-43.88386"},
+        66: {l: "SAIDA PARA PIRAPORA", c: "SAÍDA", g: "-16.76479,-43.88387"},
+        67: {l: "RODOVIARIA", c: "RODOVIA", g: "-16.74244,-43.86836"},
+        68: {l: "AV. VICENTE GUIMARAES", c: "OUTROS", g: "-16.74643,-43.87128"},
+        69: {l: "AV. DEP PLINIO RIBEIRO X AV. CEL LUIZ MAIA", c: "OUTROS", g: "-16.73092,-43.84588"},
+        70: {l: "PREFEITURA NOVA", c: "OUTROS", g: "-16.70218,-43.82876"},
+        71: {l: "TREVO TROPEIROS", c: "TREVO", g: "-16.69636,-43.81921"}
     };
 
     const grid = document.getElementById('mainGrid');
@@ -242,15 +202,10 @@
 
     function ver(id) {
         if (navigator.vibrate) navigator.vibrate(50);
-        const local = cameras[id].l;
-        document.getElementById('modal-text').innerText = local;
-        
-        // GERA O LINK QUE FORÇA O PINO NO LOCAL
-        // Usamos o prefixo "loc:" ou simplesmente a busca direta 
-        // com a cidade garante que o Google Maps coloque o marcador vermelho no cruzamento.
-        const mapsQuery = encodeURIComponent(local + ", Montes Claros, MG");
-        document.getElementById('maps-url').href = "https://www.google.com/maps/search/?api=1&query=" + mapsQuery;
-        
+        const cam = cameras[id];
+        document.getElementById('modal-text').innerText = cam.l;
+        // O LINK AGORA USA A COORDENADA GPS EXATA
+        document.getElementById('maps-url').href = "https://www.google.com/maps/search/?api=1&query=" + cam.g;
         document.getElementById('modal').style.display = "flex";
     }
 
