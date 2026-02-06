@@ -5,25 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Monitor MOC Pro</title>
+    <title>Guardiã dos Montes - Câmeras</title>
     
     <style>
         :root {
-            --primary: #004085;
-            --bg: #f2f2f7;
-            --card: #ffffff;
-            --text: #000000;
-            --search-bg: rgba(0,0,0,0.05);
+            --azul-logo: #2D46B9; /* Azul da Logo */
+            --amarelo-logo: #E9C143; /* Amarelo/Dourado da Logo */
+            --bg: #f8f9fa;
+            --texto: #1a1a1a;
             --safe-top: env(safe-area-inset-top);
         }
 
-        /* Suporte automático ao Modo Escuro */
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #1c1c1e;
-                --card: #2c2c2e;
-                --text: #ffffff;
-                --search-bg: rgba(255,255,255,0.1);
+                --bg: #121212;
+                --texto: #ffffff;
             }
         }
 
@@ -33,88 +29,80 @@
             font-family: -apple-system, system-ui, sans-serif; 
             background-color: var(--bg); 
             margin: 0; 
-            color: var(--text);
-            padding-top: calc(var(--safe-top) + 145px); /* Espaço para Header + Busca + Categorias */
+            color: var(--texto);
+            /* Espaço para o Header com Logo e Busca */
+            padding-top: calc(var(--safe-top) + 210px); 
         }
 
-        /* Cabeçalho Glassmorphism */
+        /* Cabeçalho Profissional */
         header { 
-            background: rgba(var(--primary-rgb), 0.8);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: white;
             position: fixed; top: 0; width: 100%; z-index: 1000;
             padding-top: var(--safe-top);
-            border-bottom: 0.5px solid rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
-        .header-top { 
-            background: var(--primary); 
-            color: white; 
-            padding: 15px; 
-            text-align: center; 
-            font-weight: 700; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .logo-container { padding: 15px 10px 5px 10px; }
+        .logo-img { height: 80px; width: auto; }
 
-        .search-container { padding: 10px 15px; background: var(--card); }
-        .search-box {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
+        .search-container { padding: 10px 15px; }
         #searchBar {
-            width: 100%; padding: 12px 40px 12px 15px; border-radius: 12px;
-            border: none; background: var(--search-bg); font-size: 16px; 
-            color: var(--text); outline: none;
+            width: 100%; padding: 12px 15px; border-radius: 12px;
+            border: 2px solid #eee; background: #f1f3f4; font-size: 16px; 
+            color: #000; outline: none; transition: border 0.3s;
         }
+        #searchBar:focus { border-color: var(--azul-logo); background: white; }
 
-        /* Categorias horizontais (Pills) */
+        /* Categorias horizontais */
         .categories {
             display: flex; overflow-x: auto; padding: 10px 15px; gap: 8px;
-            background: var(--card); scrollbar-width: none;
+            scrollbar-width: none; background: white;
         }
         .categories::-webkit-scrollbar { display: none; }
         .pill {
-            padding: 8px 16px; border-radius: 20px; background: var(--search-bg);
-            border: none; color: var(--text); font-size: 13px; font-weight: 600;
+            padding: 8px 18px; border-radius: 20px; background: #eee;
+            border: none; color: #555; font-size: 13px; font-weight: 700;
             white-space: nowrap; transition: 0.2s;
         }
-        .pill.active { background: var(--primary); color: white; }
+        .pill.active { background: var(--azul-logo); color: white; }
 
-        /* Grade Otimizada */
+        /* Grade de Câmeras */
         .grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-            gap: 12px; padding: 15px; max-width: 600px; margin: 0 auto;
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px; padding: 20px; max-width: 500px; margin: 0 auto;
         }
 
         .btn {
-            aspect-ratio: 1/1; background: var(--card); border: none;
-            border-radius: 18px; font-size: 22px; font-weight: 700; color: var(--primary);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            aspect-ratio: 1/1; 
+            background: var(--azul-logo); 
+            border: 3px solid var(--amarelo-logo);
+            border-radius: 18px; 
+            font-size: 32px; /* AUMENTADO */
+            font-weight: 900; 
+            color: white; /* Cor dos números */
+            box-shadow: 0 5px 15px rgba(45, 70, 185, 0.3);
             display: flex; align-items: center; justify-content: center;
-            transition: transform 0.1s, box-shadow 0.1s;
+            transition: transform 0.1s;
         }
 
-        .btn:active { transform: scale(0.9); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .btn:active { transform: scale(0.85); background: #1a2a8c; }
 
-        /* Modal Moderno */
+        /* Pop-up Personalizado */
         #modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center;
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center;
+            backdrop-filter: blur(5px);
         }
         .modal-box {
-            background: var(--card); width: 85%; max-width: 320px; padding: 30px;
-            border-radius: 25px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white; width: 85%; max-width: 320px; padding: 25px;
+            border-radius: 25px; text-align: center; border-top: 8px solid var(--amarelo-logo);
         }
-        @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        #modal-title { font-size: 12px; color: var(--primary); font-weight: 800; letter-spacing: 2px; margin-bottom: 10px; }
-        #modal-text { font-size: 18px; font-weight: bold; line-height: 1.4; text-transform: uppercase; margin-bottom: 25px; }
-        
+        #modal-title { font-size: 12px; color: var(--azul-logo); font-weight: 800; letter-spacing: 2px; margin-bottom: 10px; }
+        #modal-text { font-size: 19px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; margin-bottom: 25px; }
         .close-btn { 
-            background: var(--primary); color: white; border: none; padding: 15px; 
+            background: var(--azul-logo); color: white; border: none; padding: 15px; 
             border-radius: 15px; font-size: 16px; font-weight: 700; width: 100%;
         }
 
@@ -124,18 +112,18 @@
 <body>
 
 <header>
-    <div class="header-top">Câmeras MOC Pro</div>
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" id="searchBar" placeholder="Número ou nome da rua..." onkeyup="filtrar()">
-        </div>
+    <div class="logo-container">
+        <!-- Substitua logo.png pelo nome da sua imagem no GitHub -->
+        <img src="logo.png" alt="Guardiã dos Montes" class="logo-img">
     </div>
-    <div class="categories" id="catList">
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Pesquisar rua ou nº..." onkeyup="filtrar()">
+    </div>
+    <div class="categories">
         <button class="pill active" onclick="filtrarCat('TUDO', this)">TUDO</button>
         <button class="pill" onclick="filtrarCat('CENTRO', this)">CENTRO</button>
-        <button class="pill" onclick="filtrarCat('RODOVIA', this)">RODOVIAS</button>
         <button class="pill" onclick="filtrarCat('TREVO', this)">TREVOS</button>
-        <button class="pill" onclick="filtrarCat('SAÍDA', this)">SAÍDAS</button>
+        <button class="pill" onclick="filtrarCat('RODOVIA', this)">RODOVIAS</button>
     </div>
 </header>
 
@@ -235,7 +223,7 @@
     }
 
     function ver(id) {
-        if (navigator.vibrate) navigator.vibrate(40);
+        if (navigator.vibrate) navigator.vibrate(50);
         document.getElementById('modal-text').innerText = cameras[id].l;
         document.getElementById('modal').style.display = "flex";
     }
