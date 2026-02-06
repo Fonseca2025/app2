@@ -97,7 +97,6 @@
         #modal-title { font-size: 12px; color: var(--azul-logo); font-weight: 800; letter-spacing: 2px; margin-bottom: 10px; }
         #modal-text { font-size: 19px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; margin-bottom: 20px; }
         
-        /* Botão do Google Maps */
         .maps-link {
             display: flex;
             align-items: center;
@@ -106,17 +105,18 @@
             background: var(--verde-maps);
             color: white;
             text-decoration: none;
-            padding: 12px;
+            padding: 14px;
             border-radius: 12px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-size: 15px;
+            box-shadow: 0 4px 10px rgba(52, 168, 83, 0.3);
         }
-        .maps-link:active { opacity: 0.8; }
+        .maps-link:active { transform: scale(0.95); opacity: 0.9; }
 
         .close-btn { 
-            background: #666; color: white; border: none; padding: 12px; 
-            border-radius: 12px; font-size: 15px; font-weight: 700; width: 100%;
+            background: #f1f3f4; color: #666; border: none; padding: 12px; 
+            border-radius: 12px; font-size: 14px; font-weight: 700; width: 100%;
         }
 
         .hidden { display: none !important; }
@@ -146,12 +146,12 @@
         <div id="modal-title">DETALHES DA CÂMERA</div>
         <div id="modal-text"></div>
         
-        <!-- LINK DO GOOGLE MAPS -->
+        <!-- BOTÃO COM PINO NO MAPA -->
         <a id="maps-url" href="" target="_blank" class="maps-link">
-            📍 VER NO GOOGLE MAPS
+            📍 VER LOCAL NO MAPA
         </a>
 
-        <button class="close-btn" onclick="fechar()">FECHAR</button>
+        <button class="close-btn" onclick="fechar()">VOLTAR</button>
     </div>
 </div>
 
@@ -175,20 +175,20 @@
         16: {l: "JUCA PRATES X PE. AUGUSTO", c: "CENTRO"},
         17: {l: "R. JOAQ COSTA X CEL. ANT. D. ANJOS", c: "CENTRO"},
         18: {l: "R. JOAQ COSTA X VISC. DE OURO PRETO", c: "CENTRO"},
-        19: {l: "AV. OSV. CRUZ X PADRE CHICO", c: "CENTRO"},
-        20: {l: "AV. DULCE SARM. X FLAM. WANDERLEY", c: "CENTRO"},
-        21: {l: "AV. DULCE SARM. X SEB DIAS SOARES", c: "CENTRO"},
+        19: {l: "AV. OSV. CRUZ X PADRE CHICO", c: "OUTROS"},
+        20: {l: "AV. DULCE SARM. X FLAM. WANDERLEY", c: "OUTROS"},
+        21: {l: "AV. DULCE SARM. X SEB DIAS SOARES", c: "OUTROS"},
         22: {l: "AV. DULCE SARM. X FLORI. NEIVA", c: "OUTROS"},
-        23: {l: "AV. GERALDO ATHAIDE X AVE. ESTEVES RODRIGUES", c: "CENTRO"},
-        24: {l: "AV. GER ATHAIDE X RUA CEL JOSE ALVES", c: "CENTRO"},
+        23: {l: "AV. GERALDO ATHAIDE X AVE. ESTEVES RODRIGUES", c: "OUTROS"},
+        24: {l: "AV. GER ATHAIDE X RUA CEL JOSE ALVES", c: "OUTROS"},
         25: {l: "AV. GER ATHAIDE (CASA LOTERICA)", c: "OUTROS"},
         26: {l: "RUA SÃO FRANCISCO X RUA VISCONDE DE OURO PRETO", c: "CENTRO"},
         27: {l: "PRAÇA MATRIZ PROX BABI", c: "CENTRO"},
-        28: {l: "R. FLORIA. NEIVA X JUST. CÂMARA", c: "CENTRO"},
-        29: {l: "AV. ARMENIO VELOSO X AV. FILOMENO RIBEIRO (PRACA DE ESPORTES)", c: "CENTRO"},
-        30: {l: "RUA PE. TEIXEIRA X AV. ARMENIO VELOSO (PRACA DE ESPORTES)", c: "CENTRO"},
-        31: {l: "RUA MARECHAL DEODORO X AV. ARTUR BERNARDES", c: "CENTRO"},
-        32: {l: "DEP. ESTEVES RODR X JOAO XXIII", c: "CENTRO"},
+        28: {l: "R. FLORIA. NEIVA X JUST. CÂMARA", c: "OUTROS"},
+        29: {l: "AV. ARMENIO VELOSO X AV. FILOMENO RIBEIRO (PRACA DE ESPORTES)", c: "OUTROS"},
+        30: {l: "RUA PE. TEIXEIRA X AV. ARMENIO VELOSO (PRACA DE ESPORTES)", c: "OUTROS"},
+        31: {l: "RUA MARECHAL DEODORO X AV. ARTUR BERNARDES", c: "OUTROS"},
+        32: {l: "DEP. ESTEVES RODR X JOAO XXIII", c: "OUTROS"},
         33: {l: "JOAO XXIII ANTIGA UAI", c: "OUTROS"},
         34: {l: "AVE. JOAO XXIII X AV. PRESIDENTE KENNEDY", c: "OUTROS"},
         35: {l: "DOUTOR VELOSO X DOM PEDRO II", c: "CENTRO"},
@@ -196,18 +196,18 @@
         37: {l: "GOV. VALAD. X CEL. PRATES", c: "CENTRO"},
         38: {l: "SIMEAO RIBEIRO X ALT FREITAS", c: "CENTRO"},
         39: {l: "SIMEAO RIBEIRO X LAFETA", c: "CENTRO"},
-        40: {l: "SANTA MARIA X GONC FIGUEIRA", c: "CENTRO"},
-        41: {l: "RUA SANTA MARIA X AV. DEP ESTEVES RODRIGUES", c: "CENTRO"},
-        42: {l: "DEP EST. RODRIG CASA ESFIRRA", c: "CENTRO"},
+        40: {l: "SANTA MARIA X GONC FIGUEIRA", c: "OUTROS"},
+        41: {l: "RUA SANTA MARIA X AV. DEP ESTEVES RODRIGUES", c: "OUTROS"},
+        42: {l: "DEP EST. RODRIG CASA ESFIRRA", c: "OUTROS"},
         43: {l: "SANTA MARIA X SANTO ANTONIO", c: "OUTROS"},
         44: {l: "BAR. RIO BRANCO X AFONSO PENA", c: "CENTRO"},
         45: {l: "AV. CEL PRATES PRAÇA STA CASA", c: "CENTRO"},
         46: {l: "ALL TIME", c: "OUTROS"},
-        47: {l: "DEP EST. RODRIGUES X PREFEITURA ANTIGA", c: "CENTRO"},
+        47: {l: "DEP EST. RODRIGUES X PREFEITURA ANTIGA", c: "OUTROS"},
         48: {l: "AV. CULA MANGABEIRA - HOSPITAL UNIVERSITARIO", c: "OUTROS"},
         49: {l: "AV. CULA MANGABEIRA X RUA JOAO REBELO", c: "OUTROS"},
         50: {l: "TREV. RODOVIARIA BANCO BRASIL", c: "TREVO"},
-        51: {l: "RODOVIARIA DROGASIL", c: "OUTROS"},
+        51: {l: "RODOVIARIA DROGASIL", c: "RODOVIA"},
         52: {l: "FCO GAETANI X CASTELAR PRATES", c: "OUTROS"},
         53: {l: "PARQ. DE EXPOS X LINHA FERREA", c: "OUTROS"},
         54: {l: "LAGOA DE INTERLAGOS", c: "OUTROS"},
@@ -223,7 +223,7 @@
         64: {l: "SAIDA BR135", c: "SAÍDA"},
         65: {l: "BR135 ANEL ROD", c: "SAÍDA"},
         66: {l: "SAIDA PARA PIRAPORA", c: "SAÍDA"},
-        67: {l: "RODOVIARIA", c: "OUTROS"},
+        67: {l: "RODOVIARIA", c: "RODOVIA"},
         68: {l: "AV. VICENTE GUIMARAES", c: "OUTROS"},
         69: {l: "AV. DEP PLINIO RIBEIRO X AV. CEL LUIZ MAIA", c: "OUTROS"},
         70: {l: "PREFEITURA NOVA", c: "OUTROS"},
@@ -245,7 +245,9 @@
         const local = cameras[id].l;
         document.getElementById('modal-text').innerText = local;
         
-        // GERA O LINK DO GOOGLE MAPS
+        // GERA O LINK QUE FORÇA O PINO NO LOCAL
+        // Usamos o prefixo "loc:" ou simplesmente a busca direta 
+        // com a cidade garante que o Google Maps coloque o marcador vermelho no cruzamento.
         const mapsQuery = encodeURIComponent(local + ", Montes Claros, MG");
         document.getElementById('maps-url').href = "https://www.google.com/maps/search/?api=1&query=" + mapsQuery;
         
